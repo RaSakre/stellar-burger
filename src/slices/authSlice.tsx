@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { registerUserApi, TRegisterData } from "@api";
 
-interface formValues {
+interface IFormValues {
 	form: {
 		name: string,
 		email: string,
@@ -31,7 +31,7 @@ export const fetchRegister = createAsyncThunk(
 	}
 )
 
-const initialState:formValues = {
+const initialState:IFormValues = {
 	form: {
 			name: '',
 			email: "",

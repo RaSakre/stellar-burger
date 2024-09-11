@@ -12,8 +12,10 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const isAuthenticated = useSelector(state => state.loginReducer.isAuthenticated);
   const publicRoutes = ['/login', '/forgot-password', '/reset-password', '/register'];
   const isPublicRoute = publicRoutes.includes(location.pathname);
+
   if (!isAuthenticated && !isPublicRoute) {
-    return <Navigate replace to='/login' />;
+    return <Navigate replace to='/login' state={{ from: location }} />;
   }
+  
   return children;
 };

@@ -24,7 +24,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         <ConstructorElement
           type='top'
           isLocked
-          text={`${constructorItems.bun.name}`}
+					text={`${constructorItems.bun.name} (верх)`}
           price={constructorItems.bun.price}
           thumbnail={constructorItems.bun.image}
         />

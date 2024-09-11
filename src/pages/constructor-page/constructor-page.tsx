@@ -10,10 +10,6 @@ import { FC } from 'react';
 
 export const ConstructorPage: FC = () => {
   /** TODO: взять переменную из стора */
-	const dispatch = useDispatch()
-	useEffect(() => {
-    dispatch(fetchIngredients());
-  }, [dispatch]); 
 	const isIngredientsLoading = useSelector(state => state.ingredients.isIngredientsLoading)
   return (
     <>

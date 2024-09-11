@@ -5,7 +5,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 
 
 
-interface ingredientsConstructor {
+interface IngredientsConstructor {
 	bun: {
 		_id: string ;
 		name: string;
@@ -23,7 +23,7 @@ interface ingredientsConstructor {
 }
 
 interface IngredientsState {
-  ingredientsConstructor:ingredientsConstructor;
+  ingredientsConstructor:IngredientsConstructor;
 
 }
 
@@ -55,8 +55,8 @@ const ingredientsConstructorSlice = createSlice({
 		addBun: (state, action) => {
 			state.ingredientsConstructor.bun = {...action.payload}
 		},
-		addIngredients: (state, action) =>{
-			state.ingredientsConstructor.ingredients.push(action.payload)
+		addIngredients: (state, action) => {
+			state.ingredientsConstructor.ingredients.push(action.payload); 
 		},
 		deleteIngredient: (state, action: PayloadAction<{ _id: string }>) => {
 			const index = state.ingredientsConstructor.ingredients.findIndex(
