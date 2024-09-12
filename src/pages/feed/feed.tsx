@@ -4,7 +4,6 @@ import { TOrder } from '@utils-types';
 import { FC } from 'react';
 import { useSelector, useDispatch } from '../../services/store';
 import { useEffect } from 'react';
-import { fetchIngredients } from '../../slices/ingredientsSlice';
 import { getFeedOrders } from '../../slices/feedSlice';
 
 export const Feed: FC = () => {
@@ -21,7 +20,7 @@ export const Feed: FC = () => {
     <FeedUI
       orders={orders}
       handleGetFeeds={() => {
-        dispatch(fetchIngredients());
+        dispatch(getFeedOrders());
       }}
     />
   );

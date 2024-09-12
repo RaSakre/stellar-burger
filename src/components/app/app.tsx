@@ -43,14 +43,6 @@ const App = () => {
       <Routes location={background || location}>  
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
-        <Route
-          path='/feed/:number'
-          element={
-            <Modal title='Детали заказа' onClose={() => navigate(-1)}>
-              <OrderInfo />
-            </Modal>
-          }
-        />
         <Route path='*' element={<NotFound404 />} />
         <Route
           path='/login'
@@ -107,25 +99,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route
-            path='orders/:number'
-            element={
-              <ProtectedRoute>
-                <Modal title='Детали заказа' onClose={() => navigate(-1)}>
-                  <OrderInfo />
-                </Modal>
-              </ProtectedRoute>
-            }
-          /> 
         </Route>
-        <Route
-          path='/ingredients/:id'
-          element={
-            <Modal title='Детали ингридиента' onClose={() => navigate(-1)}>
-              <IngredientDetails />
-            </Modal>
-          }
-        /> 
       </Routes>
 			{background && 
 				<Routes>
