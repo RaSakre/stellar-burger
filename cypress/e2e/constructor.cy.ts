@@ -3,8 +3,8 @@ const API_URL = 'https://norma.nomoreparties.space/api';
 const fakeToken = 'fakeToken';
 
 beforeEach(() => {
-	window.localStorage.setItem('accessToken', fakeToken);
-	window.localStorage.setItem('refreshToken', fakeToken);
+  window.localStorage.setItem('accessToken', fakeToken);
+  window.localStorage.setItem('refreshToken', fakeToken);
   cy.fixture('mockIngredients.json').then((mockIngredients) => {
     cy.intercept('GET', `${API_URL}/ingredients`, {
       statusCode: 200,
@@ -35,8 +35,8 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-	cy.clearCookies();
-	cy.clearLocalStorage();
+  cy.clearCookies();
+  cy.clearLocalStorage();
 });
 
 describe('Тесты модальных окон', () => {
