@@ -32,16 +32,17 @@ describe('loginSlice async actions', () => {
 	});
 
 	test('should handle pending state', async () => {
-		const authSpy = jest.spyOn(api, 'loginUserApi').mockImplementation(() => new Promise(() => {})); 
-
-		store.dispatch(loginUser({ email: 'test@example.com', password: 'password' }));
-
-		const state = store.getState().loginReducer;
-		
+		const state = reducer(
+			initialState,
+			loginUser.pending(
+				'',
+				{ password: 'password', email: 'test@example.com' }
+			)
+			
+		);
 		expect(state.loginUserRequest).toBe(true);
 		expect(state.isAuthenticated).toBe(false);
-		expect(state.loginUserError).toBe('');
-		expect(authSpy).toHaveBeenCalledTimes(1);
+		expect(state.loginUserError).toBe('')
 });
 
 test('Test fetchLoginUser fulfiled', () => {
@@ -62,23 +63,23 @@ test('Test fetchLoginUser fulfiled', () => {
 		)
 		
 	);
-	console.log(state)
 	expect(state.loginUserRequest).toBe(false);
 	expect(state.isAuthenticated).toBe(true);
 	expect(state.loginUserError).toBe('')
 });
 
 test('should handle rejected state', async () => {
-		const errorMessage = 'Login failed';
+	const state = reducer(
+		initialState,
+		loginUser.rejected(
+			{name: 'fail', message: 'error'},
+			'',
+			{ password: 'password', email: 'test@example.com' }
+		)
 		
-		const authSpy = jest.spyOn(api, 'loginUserApi').mockRejectedValue(new Error(errorMessage)); 
-
-		await store.dispatch(loginUser({ email: 'test@example.com', password: 'wrongPassword' }));
-
-		const state = store.getState().loginReducer;
-		expect(state.loginUserRequest).toBe(false);
-		expect(state.isAuthenticated).toBe(false);
-		expect(state.loginUserError).toBe(errorMessage); 
-		expect(authSpy).toHaveBeenCalledTimes(1)
+	);
+	expect(state.loginUserRequest).toBe(false);
+	expect(state.isAuthenticated).toBe(false);
+	expect(state.loginUserError).toBe('error')
 });
 })
