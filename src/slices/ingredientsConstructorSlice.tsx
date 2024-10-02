@@ -27,7 +27,7 @@ interface IngredientsState {
 
 }
 
-const initialState:IngredientsState = {
+export const initialState:IngredientsState = {
 	ingredientsConstructor: {
 		bun: {
 			_id: '' ,

@@ -1,4 +1,4 @@
-import { getUserApi } from '@api';
+import { getUserApi } from '../utils/burger-api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 interface IUserInfo {
@@ -8,17 +8,16 @@ interface IUserInfo {
   };
 }
 
-const initialState: IUserInfo = {
+export const initialState: IUserInfo = {
   user: {
     email: '',
     name: ''
-  }
+  },
 };
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
   return await getUserApi();
 });
-
 const userInfoSlice = createSlice({
   name: 'loginSlice',
   initialState,
@@ -32,13 +31,13 @@ const userInfoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUser.pending, (state) => {})
-      .addCase(fetchUser.rejected, (state, action) => {})
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
       });
   }
 });
+
+export const getUser = (state:any) => state.userInfoReducer.user
 
 export const { deleteUserData, changeUserInfo } = userInfoSlice.actions;
 

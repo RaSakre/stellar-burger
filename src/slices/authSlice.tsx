@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { registerUserApi, TRegisterData } from "@api";
+import { registerUserApi, TRegisterData } from "../utils/burger-api";
 
 interface IFormValues {
 	form: {
@@ -31,7 +31,7 @@ export const fetchRegister = createAsyncThunk(
 	}
 )
 
-const initialState:IFormValues = {
+export const initialState:IFormValues = {
 	form: {
 			name: '',
 			email: "",

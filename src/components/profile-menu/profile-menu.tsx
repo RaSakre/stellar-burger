@@ -10,6 +10,7 @@ import { deleteCookie } from '../../utils/cookie'
 
 export const ProfileMenu: FC = () => {
 	const isAuthenticated = useSelector(state => state.loginReducer.isAuthenticated)
+	
 	const dispatch = useDispatch()
   const { pathname } = useLocation();
 

@@ -1,4 +1,4 @@
-import { getOrdersApi } from "@api";
+import { getOrdersApi } from "../utils/burger-api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { TOrder } from "@utils-types";
 
@@ -8,7 +8,7 @@ interface IOrder {
 	ordersProfile: TOrder[],
 }
 
-const initialState:IOrder = {
+export const initialState:IOrder = {
 	orderRequest: false,
 	orderModalData: {
 		_id: '',
@@ -50,6 +50,8 @@ const orderSlice = createSlice({
 					
 }
 })
+
+export const getProfileOrdersSelector = (state:any) => state.orderReducer.ordersProfile;
 
 export const {orderRequestStatus, orderModalDataChanges} = orderSlice.actions
 export default orderSlice.reducer

@@ -1,14 +1,13 @@
-import { loginUserApi } from "@api";
+import { loginUserApi } from "../utils/burger-api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { setCookie } from "../utils/cookie";
 
 interface TUserState {
-  isAuthChecking: boolean, 
   isAuthenticated: boolean,
   user: {
 		email:string,
-		password:string,
-	}| null ,
+		name:string,
+	},
   loginUserError: undefined | string 
   loginUserRequest: boolean,
 }
@@ -24,16 +23,15 @@ export const loginUser = createAsyncThunk(
 		const data =  await loginUserApi({email, password})
 		setCookie('accessToken', data.accessToken);
 		localStorage.setItem('refreshToken', data.refreshToken)
-		return data.user
+		return data
 	}
 )
 
-const initialState: TUserState = {
-  isAuthChecking: false, 
+export const initialState: TUserState = {
   isAuthenticated: false,
   user: {
 		email: '',
-		password: '',
+		name: '',
 	},
   loginUserError: '',
   loginUserRequest: false,
@@ -59,16 +57,17 @@ const loginSlice = createSlice({
 		.addCase(loginUser.rejected, (state, action) => {
 				state.loginUserRequest = false;
 				state.loginUserError = action.error.message;
-				state.isAuthChecking = true;
 		})
 		.addCase(loginUser.fulfilled, (state, action) => {
-				state.user = action.payload;
+				state.user = action.payload.user;
 				state.loginUserRequest = false;
-				state.isAuthenticated = true;
-				state.isAuthChecking = true;
+				state.isAuthenticated = action.payload.success;
+				state.loginUserError = '';
 		})
 }
 })
+
+export const getLoginState = (state:any) => state.loginReducer;
 
 export const {logOutParam, setAuthState} = loginSlice.actions
 

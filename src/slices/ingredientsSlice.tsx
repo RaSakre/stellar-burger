@@ -8,7 +8,7 @@ interface IngredientsState {
 	isIngredientsLoading: boolean,
 }
 
-const initialState: IngredientsState = {
+export const initialState: IngredientsState = {
   ingredients: [],
 	isIngredientsLoading:false,
 };
@@ -40,12 +40,8 @@ export const ingredientsSlice = createSlice({
 			state.isIngredientsLoading = false
 		})
 	},
-  selectors: {
-		selectIngredients: (state) => state.ingredients
-},
 })
 
-export const {selectIngredients} = ingredientsSlice.selectors
-
+export const allIngredients = (state:any) => state.ingredients.ingredients;
 
 export default ingredientsSlice.reducer
